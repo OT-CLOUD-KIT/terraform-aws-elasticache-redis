@@ -1,18 +1,18 @@
 module "elasticache" {
-  source                    = "./elasticache"
-  region                    = "ap-south-1"
-  vpc_id                    = "vpc-047ed556c10585a19"
-  subnet_ids                = ["subnet-034ba60278fe48ed1", "subnet-05341f07c88a51fcd"]
-  subnet_group_name         = "example-elasticache-subnet-group"
-  cluster_id                = "example-redis-cluster"
-  engine                    = "redis"
-  node_type                 = "cache.t3.medium"
-  parameter_group_name      = "default.redis7"
-  port                      = 6379
-  create_default_security_group = true
-  allowed_ingress_cidr_blocks  = ["0.0.0.0/0"]
-  tags                      = {
-    environment = "dev"
-    project     = "example"
+  source                     = "./elasticache"
+  region                     = "ap-south-1"
+  subnet_group_name          = "my-subnet-group"
+  vpc_id                     = "vpc-047ed556c10585a19"
+  subnet_ids                 = ["subnet-034ba60278fe48ed1", "subnet-05341f07c88a51fcd"]
+  cluster_id                 = "my-redis-cluster"
+  cluster_mode               = "enabled"
+  redis_engine_version       = "7.1"
+  security_group_ids         = []
+  automatic_failover_enabled = true
+  multi_az_enabled           = true
+  apply_immediately          = true
+  tags = {
+    Environment = "Production"
+    Application = "ExampleApp"
   }
 }

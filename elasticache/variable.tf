@@ -1,75 +1,162 @@
 variable "region" {
-  description = "AWS Region where resources will be provisioned."
+  description = "AWS region for the resources."
   type        = string
-  default     = "us-east-1"
 }
 
 variable "vpc_id" {
-  description = "VPC ID where the ElastiCache cluster will be deployed."
+  description = "VPC ID for the ElastiCache cluster."
   type        = string
-  default     = null
 }
 
 variable "subnet_ids" {
-  description = "List of subnet IDs for the ElastiCache cluster's subnet group."
+  description = "Subnets for the ElastiCache cluster."
   type        = list(string)
 }
 
-variable "subnet_group_name" {
-  description = "The name of the ElastiCache subnet group."
-  type        = string
-  default     = "default-elasticache-subnet-group"
-}
-
 variable "cluster_id" {
-  description = "Identifier for the ElastiCache cluster."
+  description = "Cluster ID for the ElastiCache cluster."
   type        = string
 }
 
 variable "engine" {
-  description = "The name of the ElastiCache engine (e.g., redis or memcached)."
+  description = "Engine for the ElastiCache cluster (e.g., redis)."
   type        = string
   default     = "redis"
 }
 
 variable "node_type" {
-  description = "The instance type of the ElastiCache node (e.g., cache.t3.medium)."
+  description = "Instance type for the ElastiCache nodes."
   type        = string
   default     = "cache.t3.micro"
 }
 
-variable "parameter_group_name" {
-  description = "The name of the ElastiCache parameter group."
-  type        = string
-  default     = "default.redis6.x"
-}
-
 variable "port" {
-  description = "The port number on which the ElastiCache instance accepts connections."
+  description = "Port for the ElastiCache cluster."
   type        = number
   default     = 6379
 }
 
-variable "security_group_ids" {
-  description = "List of security group IDs to associate with the ElastiCache cluster."
-  type        = list(string)
-  default     = []
+variable "cluster_mode" {
+  description = "Cluster mode: single_node, disabled, or enabled."
+  type        = string
+  default     = "single_node"
+  validation {
+    condition = contains(["single_node", "disabled", "enabled"], var.cluster_mode)
+    error_message = "Invalid value for cluster_mode. Must be 'single_node', 'disabled', or 'enabled'."
+  }
 }
 
-variable "allowed_ingress_cidr_blocks" {
-  description = "List of CIDR blocks allowed to access the ElastiCache cluster (used when creating the default security group)."
-  type        = list(string)
-  default     = ["0.0.0.0/0"]
+variable "num_node_groups" {
+  description = "Number of node groups for sharded mode."
+  type        = number
+  default     = 2
 }
 
-variable "create_default_security_group" {
-  description = "Whether to create a default security group for the ElastiCache cluster."
+variable "replicas_per_node_group" {
+  description = "Number of replicas per node group."
+  type        = number
+  default     = 1
+}
+
+variable "parameter_group_enabled" {
+  description = "Enable a custom parameter group."
   type        = bool
   default     = false
 }
 
+variable "parameter_group_name" {
+  description = "Custom parameter group name."
+  type        = string
+  default     = ""
+}
+
+variable "parameter" {
+  description = "List of custom parameters."
+  type = list(object({
+    name  = string
+    value = string
+  }))
+  default = []
+}
+
+variable "at_rest_encryption_enabled" {
+  description = "Enable encryption at rest."
+  type        = bool
+  default     = false
+}
+
+variable "transit_encryption_enabled" {
+  description = "Enable in-transit encryption."
+  type        = bool
+  default     = false
+}
+
+variable "auth_token" {
+  description = "Authentication token for Redis."
+  type        = string
+  default     = null
+}
+
 variable "tags" {
-  description = "A map of tags to assign to the resources."
+  description = "Tags to apply to resources."
   type        = map(string)
   default     = {}
+}
+
+
+variable "subnet_group_name" {
+  description = "Name of the ElastiCache subnet group."
+  type        = string
+}
+
+variable "create_default_security_group" {
+  description = "Whether to create a default security group."
+  type        = bool
+  default     = true
+}
+
+variable "allowed_ingress_cidr_blocks" {
+  description = "CIDR blocks allowed to access the ElastiCache cluster."
+  type        = list(string)
+  default     = ["0.0.0.0/0"]
+}
+
+variable "redis_family" {
+  description = "Redis family version for the parameter group."
+  type        = string
+  default     = "redis6.x"
+}
+# Redis Engine Version
+variable "redis_engine_version" {
+  description = "The version of the Redis engine to be used for the ElastiCache cluster."
+  type        = string
+  default     = "6.x"
+}
+
+# Security Group IDs
+variable "security_group_ids" {
+  description = "List of security group IDs to associate with the ElastiCache cluster. If empty, a default security group is created."
+  type        = list(string)
+  default     = []
+}
+
+# Automatic Failover Enabled
+variable "automatic_failover_enabled" {
+  description = "Specifies whether automatic failover is enabled for the replication group."
+  type        = bool
+  default     = false
+}
+
+# Multi-AZ Enabled
+variable "multi_az_enabled" {
+  description = "Specifies whether Multi-AZ is enabled for the replication group."
+  type        = bool
+  default     = false
+}
+
+# Apply Changes Immediately
+variable "apply_immediately" {
+  description = "Specifies whether any modifications are applied immediately, or during the next maintenance window."
+  type        = bool
+  default     = true
 }
