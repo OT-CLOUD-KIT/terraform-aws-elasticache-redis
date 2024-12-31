@@ -11,6 +11,8 @@ module "elasticache" {
   automatic_failover_enabled = true
   multi_az_enabled           = true
   apply_immediately          = true
+   num_node_groups            = 4 # Increase the number of shards
+  replicas_per_node_group    = 1 # Number of replicas per shard
   tags = {
     Environment = "Production"
     Application = "ExampleApp"
