@@ -1,5 +1,5 @@
 module "elasticache" {
-  source                     = "./elasticache"
+  source                     = "../root/"
   region                     = "ap-south-1"
   subnet_group_name          = "my-subnet-group"
   vpc_id                     = "vpc-047ed556c10585a19"
@@ -13,6 +13,7 @@ module "elasticache" {
   apply_immediately          = true
    num_node_groups            = 4 # Increase the number of shards
   replicas_per_node_group    = 1 # Number of replicas per shard
+  allowed_ingress_cidr_blocks = []
   tags = {
     Environment = "Production"
     Application = "ExampleApp"

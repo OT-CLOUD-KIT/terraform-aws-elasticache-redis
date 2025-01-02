@@ -118,7 +118,7 @@ variable "create_default_security_group" {
 variable "allowed_ingress_cidr_blocks" {
   description = "CIDR blocks allowed to access the ElastiCache cluster."
   type        = list(string)
-  default     = ["0.0.0.0/0"]
+  # default     = ["0.0.0.0/0"]
 }
 
 variable "redis_family" {
