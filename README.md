@@ -17,6 +17,7 @@
 
 ---
 ## Architecture 
+![image](https://github.com/user-attachments/assets/88bc9637-acb4-4520-a7b3-f74adc8e0190)
 
 ## Usage
 
