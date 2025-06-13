@@ -5,14 +5,14 @@
 region            = "us-east-1"
 vpc_id            = "vpc-0bfa15004ff55e107"
 subnet_ids        = ["subnet-08a2aa30dbc179a2b", "subnet-0a49bf4221b5f0107"]
-subnet_group_name = "my-redis-subnet-group-1"
+subnet_group_name = "redis-subnet-group"
 
 ##############################
 # ElastiCache Cluster
 ##############################
 
-cluster_id              = "my-redis-cluster-v2"
-cluster_mode            = "enabled"
+cluster_id              = "redis-cluster"
+cluster_mode            = "single_node"
 redis_engine_version    = "7.1"
 num_node_groups         = 1
 replicas_per_node_group = 1
@@ -28,8 +28,8 @@ allowed_ingress_cidr_blocks = ["10.0.0.0/16"]
 # Availability Settings
 ##############################
 
-automatic_failover_enabled = true
-multi_az_enabled           = true
+automatic_failover_enabled = false
+multi_az_enabled           = false
 apply_immediately          = true
 
 ##############################
@@ -38,5 +38,5 @@ apply_immediately          = true
 
 tags = {
   Environment = "Production"
-  Application = "prodApp"
+  Application = "redisapp"
 }
