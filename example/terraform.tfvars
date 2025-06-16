@@ -12,10 +12,10 @@ subnet_group_name = "redis-subnet-group"
 ##############################
 
 cluster_id              = "redis-cluster"
-cluster_mode            = "single_node"
+cluster_mode            = "disabled"
 redis_engine_version    = "7.1"
 num_node_groups         = 1
-replicas_per_node_group = 1
+replicas_per_node_group = 0
 
 ##############################
 # Security Settings
