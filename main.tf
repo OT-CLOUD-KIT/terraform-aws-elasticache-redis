@@ -1,6 +1,3 @@
-# provider "aws" {
-#   region = var.region
-# }
 
 resource "aws_elasticache_subnet_group" "this" {
   name       = var.subnet_group_name
@@ -15,26 +12,30 @@ resource "aws_security_group" "elasticache_security" {
   name_prefix = "${var.cluster_id}-sg"
   vpc_id      = var.vpc_id
 
-  dynamic "ingress" {
-    for_each = var.allowed_ingress_cidr_blocks
-    content {
-      from_port   = var.port
-      to_port     = var.port
-      protocol    = "tcp"
-      cidr_blocks = [ingress.value]
-    }
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   tags = merge(var.tags, { Name = "${var.cluster_id}-sg" })
 }
 
+resource "aws_security_group_rule" "ingress" {
+  count = var.create_default_security_group ? length(var.allowed_ingress_ports) * length(var.allowed_ingress_cidr_blocks) : 0
+
+  type              = "ingress"
+  from_port         = var.allowed_ingress_ports[floor(count.index / length(var.allowed_ingress_cidr_blocks))]
+  to_port           = var.allowed_ingress_ports[floor(count.index / length(var.allowed_ingress_cidr_blocks))]
+  protocol          = "tcp"
+  cidr_blocks       = [var.allowed_ingress_cidr_blocks[count.index % length(var.allowed_ingress_cidr_blocks)]]
+  security_group_id = aws_security_group.elasticache_security[0].id
+}
+
+resource "aws_security_group_rule" "egress" {
+  count = var.create_default_security_group ? 1 : 0
+
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.elasticache_security[0].id
+}
 resource "aws_elasticache_parameter_group" "default" {
   count  = var.parameter_group_enabled && var.parameter_group_name == "" ? 1 : 0
   name   = "parameter-group-${var.cluster_id}${var.cluster_mode == "enabled" ? "-cluster-on" : ""}"

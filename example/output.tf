@@ -1,11 +1,9 @@
-output "redis_primary_endpoint" {
-  value = module.elasticache.primary_endpoint_address
+output "elasticache_cluster_id" {
+  value = module.elasticache.cluster_id
 }
-
-output "redis_reader_endpoint" {
-  value = module.elasticache.reader_endpoint_address
+output "elasticache_security_group" {
+  value = module.elasticache.security_group_id
 }
-
-output "redis_security_groups" {
-  value = module.elasticache.security_group_ids
+output "elasticache_subnet_group" {
+  value = module.elasticache.subnet_group_name
 }
