@@ -13,11 +13,19 @@
 - Supports **custom parameter groups**
 - Allows **custom or default security groups**
 - Works with **VPC and private subnets**
-- Optional **encryption**, **snapshot retention**, and **maintenance windows**
 
 ---
 ## Architecture 
 ![image](https://github.com/user-attachments/assets/88bc9637-acb4-4520-a7b3-f74adc8e0190)
+
+
+## Providers
+| Name | Version |
+|------|---------|
+|Terraform |  >= 1.12.1|
+|aws | 5.82.2 |
+
+___
 
 ## Usage
 
@@ -25,24 +33,39 @@
 module "elasticache" {
   source = "../"
 
-  region                      = var.region
-  subnet_group_name           = var.subnet_group_name
-  vpc_id                      = var.vpc_id
-  subnet_ids                  = var.subnet_ids
-  cluster_id                  = var.cluster_id
-  cluster_mode                = var.cluster_mode
-  redis_engine_version        = var.redis_engine_version
-  security_group_ids          = var.security_group_ids
-  automatic_failover_enabled  = var.automatic_failover_enabled
-  multi_az_enabled            = var.multi_az_enabled
-  apply_immediately           = var.apply_immediately
-  num_node_groups             = var.num_node_groups
-  replicas_per_node_group     = var.replicas_per_node_group
-  allowed_ingress_cidr_blocks = var.allowed_ingress_cidr_blocks
-  tags                        = var.tags
-}
+  cluster_id                   = var.cluster_id
+  engine                       = var.engine
+  redis_engine_version         = var.redis_engine_version
+  node_type                    = var.node_type
+  port                         = var.port
+  vpc_id                       = var.vpc_id
+  subnet_ids                   = var.subnet_ids
+  subnet_group_name            = var.subnet_group_name
+  create_default_security_group = var.create_default_security_group
+  allowed_ingress_ports        = var.allowed_ingress_ports
+  allowed_ingress_cidr_blocks  = var.allowed_ingress_cidr_blocks
+  security_group_ids           = var.security_group_ids
+  tags                         = var.tags
 
+  parameter_group_enabled      = var.parameter_group_enabled
+  parameter_group_name         = var.parameter_group_name
+  redis_family                 = var.redis_family
+  parameter                    = var.parameter
+
+  cluster_mode                 = var.cluster_mode
+  at_rest_encryption_enabled   = var.at_rest_encryption_enabled
+  transit_encryption_enabled   = var.transit_encryption_enabled
+  auth_token                   = var.auth_token
+  automatic_failover_enabled   = var.automatic_failover_enabled
+  multi_az_enabled             = var.multi_az_enabled
+  apply_immediately            = var.apply_immediately
+  num_node_groups              = var.num_node_groups
+  replicas_per_node_group      = var.replicas_per_node_group
+}
 ```
+> **Note:**  
+> The above example demonstrates how to use the module. All variables, resources, and outputs used here are already defined within this module.
+
 
 ## Input Variables
 
@@ -74,3 +97,7 @@ module "elasticache" {
 ---
 
 
+## Contributor
+
+- Piyush Upadhyay
+- Nikita Joshi
