@@ -17,15 +17,16 @@
 ---
 ## Architecture 
 
-![cahce  drawio](https://github.com/user-attachments/assets/989ab14d-af3c-4627-adfd-2e1806614fbd)
+![elasticCache drawio](https://github.com/user-attachments/assets/2c9a5dae-5331-4124-86b8-750a1d1e25d0)
 
+___
 
 ## Providers
-| Name | Version |
-|------|---------|
-|Terraform |  >= 1.12.1|
-|aws | 5.82.2 |
 
+| Name                                              | Version  |
+|---------------------------------------------------|----------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.82.2   |
+| <a name="terraform_module"></a> [Terraform](Terraform\module) | >= 1.12.1|
 ___
 
 ## Usage
@@ -98,7 +99,7 @@ module "elasticache" {
 ---
 
 
-## Contributor
+## Contributors
 
-- Piyush Upadhyay
-- Nikita Joshi
+- [Piyush Upadhyay](https://github.com/piiiyuushh)
+- [Nikita Joshi](https://github.com/jnikita19)
