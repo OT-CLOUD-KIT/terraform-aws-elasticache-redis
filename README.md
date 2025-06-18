@@ -16,7 +16,8 @@
 
 ---
 ## Architecture 
-![image](https://github.com/user-attachments/assets/88bc9637-acb4-4520-a7b3-f74adc8e0190)
+
+![cahce  drawio](https://github.com/user-attachments/assets/989ab14d-af3c-4627-adfd-2e1806614fbd)
 
 
 ## Providers
