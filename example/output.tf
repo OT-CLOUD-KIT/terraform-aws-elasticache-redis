@@ -1,9 +1,11 @@
-output "elasticache_cluster_id" {
-  value = module.elasticache.cluster_id
+output "redis_cluster_id" {
+  value = module.standalone_redis.redis_cluster_id
 }
-output "elasticache_security_group" {
-  value = module.elasticache.security_group_id
+
+output "redis_endpoint" {
+  value = module.standalone_redis.redis_endpoint
 }
-output "elasticache_subnet_group" {
-  value = module.elasticache.subnet_group_name
+
+output "security_group_id" {
+  value = module.standalone_redis.security_group_id
 }
