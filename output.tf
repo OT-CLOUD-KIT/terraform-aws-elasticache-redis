@@ -9,5 +9,4 @@ output "redis_endpoint" {
 output "security_group_id" {
   value       = aws_security_group.elasticache_security[0].id
   description = "Security group created by the module"
-#   condition   = var.create_default_security_group
 }
