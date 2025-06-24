@@ -1,20 +1,34 @@
-cluster_id           = "standalone-redis"
-node_type            = "cache.t3.micro"
-engine               = "redis"
-port                 = 6379
-subnet_group_name    = "redis-subnet-group-01"
+node_type = "cache.t3.micro"
+engine    = "redis"
+port      = 6379
 
 create_default_security_group = true
 allowed_ingress_ports         = [6379]
 allowed_ingress_cidr_blocks   = ["10.0.0.0/16"]
-parameter_group_enabled = false
-parameter_group_name    = "default.redis7"
-parameter               = []
+parameter_group_enabled       = false
+parameter_group_name          = "default.redis7"
+parameter                     = []
 
-redis_family            = "redis7"
+redis_family = "redis7"
 
+region = "us-east-1"
 
-tags = {
-  Environment = "dev"
-  Project     = "RedisExample"
-}
+################# Naming Convension #####################
+
+random_alphanumeric_len = 4
+
+bu       = "pcs"
+app      = "fcicmm"
+env      = "d"
+resource = "network"
+tenant   = ""
+
+special = false
+upper   = false
+number  = true
+
+gen_no_of_names = 1
+
+team    = "ot-fcicmm-infra"
+program = "ot"
+
