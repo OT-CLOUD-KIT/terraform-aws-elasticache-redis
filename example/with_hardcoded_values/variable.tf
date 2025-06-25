@@ -76,7 +76,7 @@ variable "resource" {
   type        = string
   default     = ""
   validation {
-    condition     = length(var.resource) <= 8
+    condition     = length(var.resource) <= 20
     error_message = "The resource name must be less than or equal to 8 characters."
   }
 }

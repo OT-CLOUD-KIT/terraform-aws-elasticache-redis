@@ -17,10 +17,10 @@ region = "us-east-1"
 
 random_alphanumeric_len = 4
 
-bu       = "pcs"
-app      = "fcicmm"
+bu       = "ot"
+app      = "bp"
 env      = "d"
-resource = "network"
+resource = "elastic cache"
 tenant   = ""
 
 special = false
@@ -29,6 +29,6 @@ number  = true
 
 gen_no_of_names = 1
 
-team    = "ot-fcicmm-infra"
+team    = "infra"
 program = "ot"
 

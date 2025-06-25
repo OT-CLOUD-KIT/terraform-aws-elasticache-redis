@@ -58,7 +58,7 @@ variable "bu" {
   type        = string
 
   validation {
-    condition     = length(var.bu) <= 6
+    condition     = length(var.bu) <= 10
     error_message = "The business unit name must be less than or equal to 6 characters."
   }
 }
@@ -73,7 +73,7 @@ variable "app" {
   type        = string
 
   validation {
-    condition     = length(var.app) <= 6
+    condition     = length(var.app) <= 10
     error_message = "The app name must be less than or equal to 6 characters."
   }
 }

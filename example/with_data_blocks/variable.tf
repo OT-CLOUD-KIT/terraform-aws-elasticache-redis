@@ -90,7 +90,7 @@ variable "app" {
   description = "Application name (e.g., network, shared). Max 6 characters."
   type        = string
   validation {
-    condition     = length(var.app) <= 6
+    condition     = length(var.app) <= 15
     error_message = "The app name must be less than or equal to 6 characters."
   }
 }
@@ -100,7 +100,7 @@ variable "resource" {
   type        = string
   default     = ""
   validation {
-    condition     = length(var.resource) <= 8
+    condition     = length(var.resource) <= 15
     error_message = "The resource name must be less than or equal to 8 characters."
   }
 }

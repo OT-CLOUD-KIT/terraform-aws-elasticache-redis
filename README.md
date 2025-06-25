@@ -36,7 +36,7 @@ ___
 
 ```hcl
 module "standalone_redis" {
-  source = "../"
+  source = "OT-CLOUD-KIT/terraform-aws-elasticache-redis"
 
   cluster_id           = "standalone-redis"
   node_type            = "cache.t3.micro"
@@ -44,7 +44,7 @@ module "standalone_redis" {
   port                 = 6379
 
   vpc_id               = "vpc-0a1b2c3d4e5f67890"
-  subnet_ids           = ["subnet-aaa111", "subnet-bbb222"]
+  subnet_ids           = ["subnet-aaa136711", "subnet-bbb2578g22"]
   subnet_group_name    = "redis-subnet-group-01"
 
   create_default_security_group = true
