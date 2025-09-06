@@ -21,19 +21,6 @@ security_group_ids = [] ## leave blank for auto created SG
 region = "us-east-1"
 ################# Naming Convension #####################
 
-random_alphanumeric_len = 4
-
-bu       = "ot"
-app      = "bp"
-env      = "d"
-resource = "elastic cache"
-tenant   = ""
-
-special = false
-upper   = false
-number  = true
-
-gen_no_of_names = 1
-
-team    = "devops"
-program = "ot"
+owner = "opstree"
+env = "dev"
+app = "ot-cloud-kit"

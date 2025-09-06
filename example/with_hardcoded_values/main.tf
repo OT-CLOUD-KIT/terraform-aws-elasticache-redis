@@ -1,22 +1,3 @@
-module "naming" {
-  source   = "git@github.com:OT-CLOUD-KIT/terraform-aws-naming.git?ref=dev"
-  bu       = var.bu
-  env      = var.env
-  app      = var.app
-  tenant   = var.tenant
-  resource = var.resource
-}
-
-module "standard_tags" {
-  source = "git@github.com:OT-CLOUD-KIT/terraform-aws-standard-tagging.git?ref=dev"
-
-  bu      = var.bu
-  program = var.program
-  app     = var.app
-  team    = var.team
-  region  = var.region
-  env     = var.env
-}
 
 
 
@@ -26,12 +7,9 @@ module "standalone_redis" {
   node_type  = var.node_type
   engine     = var.engine
   port       = var.port
-  bu         = var.bu
-  program    = var.program
-  team       = var.team
+  owner= var.owner
   app        = var.app
   env        = var.env
-  region     = var.region
   vpc_id     = var.vpc_id
   subnet_ids = var.subnet_ids
 
